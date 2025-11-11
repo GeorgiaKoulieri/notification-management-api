@@ -8,85 +8,99 @@ It uses an **in-memory repository**, allowing it to run easily without any addit
 
 ---
 
-## Tech Stack
+##  Tech Stack
 
-- .NET 8 (C#)
-- ASP.NET Core Web API
-- xUnit (unit testing)
-- In-memory data store (thread-safe)
-- Swagger (for development)
+- **.NET 8 (C#)**
+- **ASP.NET Core Web API**
+- **xUnit** (unit testing)
+- **In-memory data store** (thread-safe)
+- **Swagger** (for development)
 
 ---
 
-## Project Structure
+##  Project Structure
 
+```
 NotificationApi/
+│
 ├── Controllers/
-│ └── NotificationsController.cs
+│   └── NotificationsController.cs
+│
 ├── Coordinators/
-│ └── NotificationCoordinator.cs
+│   └── NotificationCoordinator.cs
+│
 ├── Helpers/
-│ └── NotificationHelper.cs
+│   └── NotificationHelper.cs
+│
 ├── Models/
-│ ├── Notification.cs
-│ ├── Requests/
-│ │ └── CreateNotificationRequest.cs
-│ └── Responses/
-│ └── NotificationResponse.cs
+│   ├── Notification.cs
+│   ├── Requests/
+│   │   └── CreateNotificationRequest.cs
+│   └── Responses/
+│       └── NotificationResponse.cs
+│
 ├── Services/
-│ ├── INotificationRepository.cs
-│ └── InMemoryNotificationRepository.cs
+│   ├── INotificationRepository.cs
+│   └── InMemoryNotificationRepository.cs
+│
 ├── Program.cs
 └── NotificationApi.csproj
-
-
+```
 
 ---
 
-## How to Run
+##  How to Run
 
-1. Install the [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download)
+1. Install the [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download)  
 2. Open a terminal in the project folder and run:
+
    ```bash
    dotnet run --project NotificationApi/NotificationApi.csproj
+   ```
+
 3. The API starts by default at:
 
-https://localhost:5001
+   - https://localhost:5001  
+   - http://localhost:5000
 
-or http://localhost:5000
+4. Swagger UI is available in Development mode at `/swagger`.
 
-4. Swagger UI is available in Development mode at /swagger.
+---
 
-Endpoints
-Create a notification
+##  Endpoints
 
-http
+### Create a notification
+
+```http
 POST /api/notifications
-
 Content-Type: application/json
 
 {
-  "userId": "user1 ",
+  "userId": "user-123",
   "title": "Welcome",
   "message": "Thanks for joining!",
   "channel": "in-app",
   "priority": 1
 }
+```
 
-Get notifications by user
+### Get notifications by user
 
-http
-GET /api/notifications/user1
+```http
+GET /api/notifications/user-123
+```
 
+### Update notification status
 
-Update notification status
-
-http
+```http
 PATCH /api/notifications/{id}/status/{status}
 # status: Pending | Sent | Read | Failed
+```
 
-Tests
-Run the test suite:
+---
 
-bash
+##  Run Tests
+
+```bash
 dotnet test
+```
